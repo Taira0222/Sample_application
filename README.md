@@ -1,24 +1,29 @@
-# README
+ # RubyonRailsチュートリアルのサンプルアプリケーション
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+これは、次の教材で作られたサンプルアプリケーションです。
+[*Ruby on Rails チュートリアル*](https://railstutorial.jp/)
+（第7版）
+[Michael Hartl](https://www.michaelhartl.com/) 著
 
-Things you may want to cover:
+## ライセンス
 
-* Ruby version
+[Ruby on Rails チュートリアル](https://railstutorial.jp/)内にある
+ソースコードはMITライセンスとBeerwareライセンスのもとで公開されています。
+詳細は[LICENSE.md](LICENSE.md)をご覧ください。
 
-* System dependencies
+## 使い方
+このアプリケーションを動かす場合は、まずはリポジトリをフォークしてください。
+フォークしたリポジトリで、「Code」から「Codespaces」タブに移動し、
+「Createcodespaceonmain」をクリックすると環境構築がスタートします。
+Railsサーバーが立ち上がり、シンプルブラウザが表示されるまでしばらくお待ちください。
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+次に、データベースへのマイグレーションを実行します。
+```ruby
+ $rails db:migrate
+ ```
+最後に、テストを実行してうまく動いているかどうか確認してください。
+```ruby
+ $rails test
+ ```
+詳しくは、[*Ruby on Rails チュートリアル*](https://railstutorial.jp/)
+を参考にしてください。
