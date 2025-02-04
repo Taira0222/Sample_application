@@ -47,7 +47,6 @@ end
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 
-gem 'websocket-driver', '0.7.6' # 0.7.7だとbase64に依存しているためバージョンを固定
-
+gem 'websocket-driver', '0.7.7' 
 gem 'concurrent-ruby', '1.3.4' # 1.3.5だとrailsのエラーが発生する
 
