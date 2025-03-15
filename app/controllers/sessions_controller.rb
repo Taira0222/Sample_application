@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase) # 入力されたemailと同じデータがDB内にあるか
     if user&.authenticate(params[:session][:password]) # そのuserのPWが正しいか
       reset_session #session id を更新してセッション固定を防止
+      remember user
       log_in user
       redirect_to user
     else

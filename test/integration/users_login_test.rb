@@ -57,7 +57,7 @@ class LogoutTest < Logout
     assert_redirected_to root_url
   end
 
-  test "redirectafter logout" do
+  test "redirect after logout" do
     follow_redirect!
     assert_select "a[href=?]", login_path
     assert_select "a[href=?]", logout_path, count: 0
