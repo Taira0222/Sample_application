@@ -63,4 +63,26 @@ class LogoutTest < Logout
     assert_select "a[href=?]", logout_path, count: 0
     assert_select "a[href=?]", user_path(@user), count:0
   end
+
+  test "should still work after logout in second window" do
+    delete logout_path # sessionコントローラーのdestroyを呼び出す
+    assert_redirected_to root_url
+  end
+end
+
+class RememberingTest < UsersLogin
+  test "login with remembering" do # 記憶トークンが発行されているかの確認(あくまでもcookieの記憶トークンが空でないことを確認)
+    log_in_as(@user,remember_me: '1')
+    assert_equal User.digest(cookies[:remember_token]), assigns(:user).remember_digest # 未解決
+  end
+
+  test "login without remembering" do
+    # Cookie を保存してログイン
+    log_in_as(@user, remember_me: '1') 
+    delete logout_path # ログアウトしてcookieを削除
+
+    # Cookie削除後にログイン
+    log_in_as(@user, remember_me: '0')
+    assert cookies[:remember_token].blank?
+  end
 end
