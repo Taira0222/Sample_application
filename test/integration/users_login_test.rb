@@ -71,9 +71,9 @@ class LogoutTest < Logout
 end
 
 class RememberingTest < UsersLogin
-  test "login with remembering" do # 記憶トークンが発行されているかの確認(あくまでもcookieの記憶トークンが空でないことを確認)
+  test "login with remembering" do 
     log_in_as(@user,remember_me: '1')
-    assert_equal User.digest(cookies[:remember_token]), assigns(:user).remember_digest # 未解決
+    assert_equal cookies[:remember_token], assigns(:user).remember_token 
   end
 
   test "login without remembering" do
