@@ -7,7 +7,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   class << self
     #渡された文字列のハッシュ値を返す
@@ -32,7 +32,7 @@ class User < ApplicationRecord
   # セッションハイジャック防止のためにセッショントークンを返す
   # この記憶ダイジェストを再利用しているのは単に利便性のため
   def session_token
-    remember_digest || remember # remember_digestがtrueならremember_digestを、remember_digestがfalseならrememeberを返り値に設定
+    remember_digest || remember # remember_digestがtrueならremember_digestを、remember_digestがfalseならrememberを返り値に設定
   end
 
   # 渡されたトークンがダイジェストと一致したらtrueを返す
