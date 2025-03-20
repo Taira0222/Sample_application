@@ -17,10 +17,11 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_select 'div.alert','The form contains 4 errors.'
   end
 
-  test 'successful edit' do
-    log_in_as(@user)
+  test 'successful edit with friendly forwarding' do
     get edit_user_path(@user)
-    assert_template 'users/edit'
+    log_in_as(@user)
+    assert_redirected_to edit_user_url(@user)
+    assert session[:forwarding_url].nil? # 一時保存したforwarding_urlがリセットされているかチェック
     name = 'Foo Bar'
     email = 'foo@bar.com'
     patch user_path(@user), params: { user: { name: name,
@@ -33,5 +34,14 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_equal name, @user.name
     assert_equal email, @user.email                                     
   end
+  test 'Check forwarding_url after successful edit with friendly forwarding' do # 演習 p.546
+    get edit_user_path(@user)
+    log_in_as(@user)
+    assert_redirected_to edit_user_url(@user)
+    assert session[:forwarding_url].nil? # 一時保存したforwarding_urlがリセットされているかチェック
 
+    delete logout_path
+    log_in_as(@user)
+    assert_redirected_to @user
+  end
 end
