@@ -22,7 +22,7 @@ module SessionsHelper
       end
     elsif (user_id = cookies.encrypted[:user_id]) # ブラウザ再訪問時にはセッションがないため、cookiesを使用してcurrent_userを設定する
       user = User.find_by(id: user_id)
-      if user && user.authenticated?(cookies[:remember_token]) # DBのremeber_digestとcookieのremember_tokenが等しいか確認
+      if user && user.authenticated?(:remember, cookies[:remember_token]) # DBのremeber_digestとcookieのremember_tokenが等しいか確認
         log_in user
         @current_user = user
       end
