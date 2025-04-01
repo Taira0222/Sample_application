@@ -1,7 +1,7 @@
 require "test_helper"
 
 class UsersProfileTest < ActionDispatch::IntegrationTest
-  include ApplicationHelper
+  include ApplicationHelper # full_titleメソッドを使用するため
 
   def setup
     @user =users(:michael)
